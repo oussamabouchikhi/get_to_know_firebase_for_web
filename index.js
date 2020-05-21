@@ -57,11 +57,11 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 // Listen to the current Auth state
 firebase.auth().onAuthStateChanged((user)=> {
-  if (user) {
-    startRsvpButton.textContent = "LOGOUT"
+  if (user) { // If user is authenticated
+    startRsvpButton.textContent = "LOGOUT"; // set button text to LOGOUT
   }
   else {
-    startRsvpButton.textContent = "RSVP"
+    startRsvpButton.textContent = "RSVP"; // set button text to RSPV
   }
 });
 
@@ -69,4 +69,13 @@ firebase.auth().onAuthStateChanged((user)=> {
 startRsvpButton.addEventListener("click", () => {
       // show sign-in with email form
       ui.start("#firebaseui-auth-container", uiConfig);
+});
+
+// Called when the user clicks the RSVP button
+startRsvpButton.addEventListener("click", () => {
+    if (firebase.auth().currentUser) { // If user is signed in
+      firebase.auth().signOut(); // allows user to sign out
+    } else { // No user is signed in
+      ui.start("#firebaseui-auth-container", uiConfig); // allows user to sign in
+    }
 });
