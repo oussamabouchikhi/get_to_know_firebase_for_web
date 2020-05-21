@@ -1,11 +1,5 @@
-# WTM Summit 2019 Firebase Workshop
-
-Check out each step:
-* https://stackblitz.com/edit/wtm-start
-* https://stackblitz.com/edit/wtm-checkpoint1
-* https://stackblitz.com/edit/wtm-checkpoint2
-* https://stackblitz.com/edit/wtm-checkpoint3
-* https://stackblitz.com/edit/wtm-next-steps
+# Firebase Meetup
+Get to Know Firebase for web Google codelab, in which I learned some of the basics of Firebase to create interactive web applications. I have build and deployed an event RSVP and guestbook chat app using several Firebase products.
 
 ### How to use
 1) Create a project in the Firebase console
