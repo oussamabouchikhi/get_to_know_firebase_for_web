@@ -33,6 +33,8 @@ var firebaseConfig = {
   messagingSenderId: "984786288824",
   appId: "1:984786288824:web:1c4fcd80d7cec8f914344d"
 };
+// Initiallize firebase
+firebase.initializeApp(firebaseConfig);
 
 // FirebaseUI config
 const uiConfig = {
@@ -49,3 +51,6 @@ const uiConfig = {
     }
   }
 };
+
+// Initialize the FirebaseUI widget using Firebase
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
