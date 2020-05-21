@@ -75,8 +75,12 @@ startRsvpButton.addEventListener("click", () => {
 startRsvpButton.addEventListener("click", () => {
     if (firebase.auth().currentUser) { // If user is signed in
       firebase.auth().signOut(); // allows user to sign out
+      // Show guestbook to logged-in users
+      guestbookContainer.style.display = "block";
     } else { // No user is signed in
       ui.start("#firebaseui-auth-container", uiConfig); // allows user to sign in
+      // Hide guestbook for non-logged-in users
+      guestbookContainer.style.display = "none";
     }
 });
 
