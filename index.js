@@ -55,6 +55,16 @@ const uiConfig = {
 // Initialize the FirebaseUI widget using Firebase
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+// Listen to the current Auth state
+firebase.auth().onAuthStateChanged((user)=> {
+  if (user) {
+    startRsvpButton.textContent = "LOGOUT"
+  }
+  else {
+    startRsvpButton.textContent = "RSVP"
+  }
+});
+
 // Listen to RSVP button clicks
 startRsvpButton.addEventListener("click", () => {
       // show sign-in with email form
