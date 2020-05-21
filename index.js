@@ -24,8 +24,15 @@ var rsvpListener = null;
 var guestbookListener = null;
 
 // Add Firebase project configuration object here
-// var firebaseConfig = {};
-
+var firebaseConfig = {
+  apiKey: "AIzaSyDaIYXvntFVdL9l3EsAxQpx2HbvtEMP9KM",
+  authDomain: "fir-meetup-234eb.firebaseapp.com",
+  databaseURL: "https://fir-meetup-234eb.firebaseio.com",
+  projectId: "fir-meetup-234eb",
+  storageBucket: "fir-meetup-234eb.appspot.com",
+  messagingSenderId: "984786288824",
+  appId: "1:984786288824:web:1c4fcd80d7cec8f914344d"
+};
 
 // FirebaseUI config
 const uiConfig = {
