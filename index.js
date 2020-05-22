@@ -146,3 +146,24 @@ function unsubscribeGuestbook(){
    guestbookListener = null;
  }
 };
+
+// Listen to RSVP responses
+rsvpYes.onclick = () => {
+ // Get a reference to the user's document in the attendees collection
+ const userDoc = firebase.firestore().collection('attendees').doc(firebase.auth().currentUser.uid);
+
+ // If they RSVP'd yes, save a document with attending: true
+ userDoc.set({
+   attending: true
+ }).catch(console.error)
+}
+
+rsvpNo.onclick = () => {
+ // Get a reference to the user's document in the attendees collection
+ const userDoc = firebase.firestore().collection('attendees').doc(firebase.auth().currentUser.uid);
+
+ // If they RSVP'd no, save a document with attending: false
+ userDoc.set({
+   attending: false
+ }).catch(console.error)
+}
