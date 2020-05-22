@@ -115,3 +115,21 @@ firebase.firestore().collection("guestbook")
    guestbook.appendChild(entry);
  });
 });
+
+// Listen to guestbook updates
+function subscribeGuestbook(){
+   // Create query for messages
+ guestbookListener = firebase.firestore().collection("guestbook")
+ .orderBy("timestamp","desc")
+ .onSnapshot((snaps) => {
+   // Reset page
+   guestbook.innerHTML = "";
+   // Loop through documents in database
+   snaps.forEach((doc) => {
+     // Create an HTML entry for each document and add it to the chat
+     const entry = document.createElement("p");
+     entry.textContent = doc.data().name + ": " + doc.data().text;
+     guestbook.appendChild(entry);
+   });
+ });
+};
