@@ -133,3 +133,12 @@ function subscribeGuestbook(){
    });
  });
 };
+
+// Unsubscribe from guestbook updates
+function unsubscribeGuestbook(){
+ if (guestbookListener != null)
+ {
+   guestbookListener();
+   guestbookListener = null;
+ }
+};
