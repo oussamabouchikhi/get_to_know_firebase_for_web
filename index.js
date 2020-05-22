@@ -77,10 +77,14 @@ startRsvpButton.addEventListener("click", () => {
       firebase.auth().signOut(); // allows user to sign out
       // Show guestbook to logged-in users
       guestbookContainer.style.display = "block";
+      // Subscribe to the guestbook collection
+      subscribeGuestbook();
     } else { // No user is signed in
       ui.start("#firebaseui-auth-container", uiConfig); // allows user to sign in
       // Hide guestbook for non-logged-in users
       guestbookContainer.style.display = "none";
+      // Unsubscribe from the guestbook collection
+      unsubscribeGuestbook();
     }
 });
 
