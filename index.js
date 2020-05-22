@@ -167,3 +167,25 @@ rsvpNo.onclick = () => {
    attending: false
  }).catch(console.error)
 }
+
+// Listen for attendee list
+function subscribeCurrentRSVP(user){
+ rsvpListener = firebase.firestore()
+ .collection('attendees')
+ .doc(user.uid)
+ .onSnapshot((doc) => {
+   if (doc && doc.data()){
+     const attendingResponse = doc.data().attending;
+
+     // Update css classes for buttons
+     if (attendingResponse){
+       rsvpYes.className="clicked";
+       rsvpNo.className="";
+     }
+     else{
+       rsvpYes.className="";
+       rsvpNo.className="clicked";
+     }
+   }
+ });
+}
