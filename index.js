@@ -107,7 +107,7 @@ form.addEventListener("submit", (e) => {
 
 // Create query for messages
 firebase.firestore().collection("guestbook")
-.orderBy("timestamp","desc")
+.orderBy("timestamp","asc")
 .onSnapshot((snaps) => {
  // Reset page
  guestbook.innerHTML = "";
