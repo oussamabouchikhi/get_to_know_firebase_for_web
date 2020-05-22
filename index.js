@@ -55,14 +55,30 @@ const uiConfig = {
 // Initialize the FirebaseUI widget using Firebase
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+
 // Listen to the current Auth state
-firebase.auth().onAuthStateChanged((user)=> {
-  if (user) { // If user is authenticated
-    startRsvpButton.textContent = "LOGOUT"; // set button text to LOGOUT
-  }
-  else {
-    startRsvpButton.textContent = "RSVP"; // set button text to RSPV
-  }
+firebase.auth().onAuthStateChanged((user) => {
+if (user){
+  startRsvpButton.textContent = "LOGOUT";
+  // Show guestbook to logged-in users
+  guestbookContainer.style.display = "block";
+
+  // Subscribe to the guestbook collection
+  subscribeGuestbook();
+  // Subscribe to the guestbook collection
+  subscribeCurrentRSVP(user);
+}
+else{
+  startRsvpButton.textContent = "RSVP";
+  // Hide guestbook for non-logged-in users
+  guestbookContainer.style.display = "none";
+
+  // Unsubscribe from the guestbook collection
+  unsubscribeGuestbook();
+  // Unsubscribe from the guestbook collection
+  unsubscribeCurrentRSVP();
+
+}
 });
 
 // Listen to RSVP button clicks
@@ -124,7 +140,7 @@ firebase.firestore().collection("guestbook")
 function subscribeGuestbook(){
    // Create query for messages
  guestbookListener = firebase.firestore().collection("guestbook")
- .orderBy("timestamp","desc")
+ .orderBy("timestamp","asc")
  .onSnapshot((snaps) => {
    // Reset page
    guestbook.innerHTML = "";
@@ -169,6 +185,16 @@ rsvpNo.onclick = () => {
 }
 
 // Listen for attendee list
+firebase.firestore()
+.collection('attendees')
+.where("attending", "==", true)
+.onSnapshot(snap => {
+ const newAttendeeCount = snap.docs.length;
+
+ numberAttending.innerHTML = newAttendeeCount+' people going';
+})
+
+// Listen for attendee list
 function subscribeCurrentRSVP(user){
  rsvpListener = firebase.firestore()
  .collection('attendees')
@@ -188,4 +214,14 @@ function subscribeCurrentRSVP(user){
      }
    }
  });
+}
+
+function unsubscribeCurrentRSVP(){
+ if (rsvpListener != null)
+ {
+   rsvpListener();
+   rsvpListener = null;
+ }
+ rsvpYes.className="";
+ rsvpNo.className="";
 }
